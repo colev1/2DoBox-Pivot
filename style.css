@@ -1,17 +1,13 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
 .container {
     display: flex;
     flex-direction: column;
     font-family: 'Roboto Slab', serif;
 }
 
-.container-box {
-    margin: 0;
-}
-
-body {
-    box-sizing: border-box;
-    margin: 0;
-}
 
 .top-box {
     background-color: #e5f3f2;
@@ -32,23 +28,22 @@ h1{
     color: #00a79d;
 }
 
-#title-input {
+.save-btn:hover {
+    background-color: #045e55;
+}
+
+.inputs{
     align-items: center;
     display: flex;
     height: 30px;
     justify-content: space-between;
     width: 45%;
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
 }
 
-#body-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
-}
-
-#search-input {
+.search-input {
     height: 30px;
     margin-top: 50px;
     width: 45%;
@@ -58,22 +53,6 @@ h1{
     background-color: #00a79d;
     border: none;
     color: #fff;
-    font-size: 120%;
-    height: 30px;
-    width: 45.5%;
-}
-
-.save-btn:hover {
-    background-color: #045e55;
-}
-
-input {
-    align-items: center;
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-    justify-content: space-between;
-    margin: auto;
 }
 
 .card-container {
