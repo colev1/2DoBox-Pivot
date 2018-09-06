@@ -33,7 +33,6 @@ h1{
 }
 
 .inputs{
-    align-items: center;
     display: flex;
     height: 30px;
     justify-content: space-between;
@@ -53,6 +52,8 @@ h1{
     background-color: #00a79d;
     border: none;
     color: #fff;
+    display: flex;
+    justify-content: center;
 }
 
 .card-container {
@@ -68,7 +69,7 @@ h1{
     width: 45%;
 }
 
-.title-of-card{
+.title-of-card {
     color: #6D6E71;
     display: inline-block;
     font-family: 'Roboto Slab', serif;
