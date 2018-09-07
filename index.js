@@ -11,8 +11,7 @@ var newCard = function(id , title , body , quality) {
             + body + '</p>'
             + '<button class="upvote"></button>' 
             + '<button class="downvote"></button>' 
-            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>'
-            + '<hr>' 
+            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>' 
             + '</div>';
 };
 

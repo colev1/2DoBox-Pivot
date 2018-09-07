@@ -17,11 +17,11 @@
     text-align: center;
 }
 
-h1{
+.header{
     color: #6d6e71;
     display: inline-block;
     font-size: 275%;
-    margin-bottom:  30px;
+    margin:  16px;
 }
 
 .idea {
@@ -32,6 +32,12 @@ h1{
     background-color: #045e55;
 }
 
+.input-form-container{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    }
+
 .inputs{
     display: flex;
     height: 30px;
@@ -40,6 +46,7 @@ h1{
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
     margin: auto;
+    margin-top: 14px;
 }
 
 .search-input {
@@ -58,8 +65,11 @@ h1{
 
 .card-container {
     margin: auto;
+    margin-top: 16px;
+    padding: 10px;
     position: relative;
     width: 45%;
+    border-bottom: solid black 1px;
 }
 
 .card {
