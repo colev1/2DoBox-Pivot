@@ -10,15 +10,14 @@
 <body>
   <section class="container">
     <article class="top-box">
-      <h1><span class="idea">idea</span>box</h1>
-      <form>
-        <input class="title-input inputs" type="text" placeholder="Title"> <br />
-        <!-- take out break tags -->
-        <input class="body-input inputs" type="text" placeholder="Body"> <br />  
-        <button class="save-btn inputs">save</button> <br />
+      <h1 class="header"><span class="idea">idea</span>box</h1>
+      <form class="input-form-container">
+        <input class="title-input inputs" type="text" placeholder="Title" aria-label="Type the title of your idea here"> 
+        <input class="body-input inputs" type="text" placeholder="Body" aria-label="Type the body of your idea here">
+        <button class="save-btn inputs">save</button> 
       </form>
     </article>
-    <input class="search-input inputs" type="text" placeholder="Search">
+    <input class="search-input inputs" type="text" placeholder="Search" aria-label="Search through ideas">
     <article class="bottom-box"></article>
   </section>
   <script src="./jquery/jquery-3.2.1.js"></script>
