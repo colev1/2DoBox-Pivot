@@ -3,168 +3,172 @@
     margin: 0;
 }
 .container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto Slab', serif;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto Slab', serif;
+
 }
 
-
 .top-box {
-    background-color: #e5f3f2;
-    box-sizing: border-box;
-    height: 300px;
-    margin: 0;
-    text-align: center;
+  background-color: #e5f3f2;
+  box-sizing: border-box;
+  height: 300px;
+  margin: 0;
+  text-align: center;
 }
 
 .header{
-    color: #6d6e71;
-    display: inline-block;
-    font-size: 275%;
-    margin:  16px;
+  color: #6d6e71;
+  display: inline-block;
+  font-size: 275%;
+  margin:  16px;
 }
 
 .idea {
-    color: #00a79d;
+  color: #00a79d;
 }
 
 .save-btn:hover {
-    background-color: #045e55;
+  background-color: #045e55;
 }
 
-.input-form-container{
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
+.input-form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
     }
 
 .inputs{
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
-    font-size: 100%;
-    font-family: 'Open Sans', sans-serif;
-    margin: auto;
-    margin-top: 14px;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  width: 45%;
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  margin: auto;
+  margin-top: 14px;
 }
 
 .search-input {
-    height: 30px;
-    margin-top: 50px;
-    width: 45%;
+  height: 30px;
+  margin-top: 50px;
+  width: 45%;
 }
 
 .save-btn {
-    background-color: #00a79d;
-    border: none;
-    color: #fff;
-    display: flex;
-    justify-content: center;
+  background-color: #00a79d;
+  border: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
 }
 
 .card-container {
-    margin: auto;
-    margin-top: 16px;
-    padding: 10px;
-    position: relative;
-    width: 45%;
-    border-bottom: solid black 1px;
+  margin: auto;
+  margin-top: 16px;
+  padding: 10px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  width: 45%;
+  border-bottom: solid black 1px;
 }
 
 .card {
-    background-color: #ffffff;
-    height: auto;
-    margin: auto;
-    width: 45%;
+  background-color: #ffffff;
+  height: auto;
+  margin: auto;
+  width: 45%;
 }
 
 .title-of-card {
-    color: #6D6E71;
-    display: inline-block;
-    font-family: 'Roboto Slab', serif;
-    font-size: 140%;
-}
-
-h2 {
-   color: #6d6e71; 
-   display: inline-block;
-   font-family: 'Roboto Slab', serif;
-   font-size: 150%;
+  color: #6D6E71;
+  display: inline-block;
+  font-family: 'Roboto Slab', serif;
+  font-size: 140%;
 }
 
 p {
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
+  color: #939598;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .body-of-card{
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
+  color: #939598;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 100%;
 }
 
 button {
-    background-color: transparent;
-    border: none;
+  background-color: transparent;
+  border: none;
 }
 
 .upvote {
-    background-image: url(./images/upvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
+  background-image: url(./images/upvote.svg);
+  background-size: cover;
+  height: 20px;
+  margin-right: 5px; 
+  width: 20px;
 }
 
 .upvote:hover {
-    background-color: transparent;
-    background-image: url(./images/upvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+  background-color: transparent;
+  background-image: url(./images/upvote-hover.svg);
+  background-size: cover;
+  height: 20px;
+  width: 20px;
 }
 
 .downvote {
-    background-image: url(./images/downvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
+  background-image: url(./images/downvote.svg);
+  background-size: cover;
+  height: 20px;
+  margin-right: 5px; 
+  width: 20px;
 }
 
 .downvote:hover {
-    background-image: url(./images/downvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+  background-image: url(./images/downvote-hover.svg);
+  background-size: cover;
+  height: 20px;
+  width: 20px;
 }
 
 .delete-button {
-    background-image: url(./images/delete.svg);
-    background-size: cover;
-    height: 20px;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    width: 20px;
+  background-image: url(./images/delete.svg);
+  background-size: cover;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 20px;
 }
 
 .delete-button:hover {
-    background-image: url(./images/delete-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+  background-image: url(./images/delete-hover.svg);
+  background-size: cover;
+  height: 20px;
+  width: 20px;
 }
 
-@media(max-width: 640px){
+@media(max-width: 700px) {
 
-    .card-container {
-        width: 85%;
-    }
+  .card-container {
+      width: 85%;
+  }
+  .inputs{
+    width: 85%;
+    
+  }
 
-    #search-input {
-        border: solid #999 1px;
-    }
+  .search-input {
+      border: solid #999 1px;
+      width: 76%;
+  }
+  .container{
+    min-width: 200px;
+  }
+  
 }
 
