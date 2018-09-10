@@ -1,7 +1,7 @@
-var title = $('.title-input').val();
-var body = $('.body-input').val();
+// var title = $('.title-input').val();
+// var body = $('.body-input').val();
 var numCards = 0;
-var qualityVariable = "swill";
+// var qualityVariable = "swill";
 
 // var newCard = function(id , title , body , quality) {
 //   return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
@@ -25,17 +25,17 @@ function newCard(id , title , body , quality) {
                 <button class="upvote"></button> <button class="downvote"></button> 
                 <span class="quality"> quality: <span class="qualityVariable"> ${quality} </span> </span>
             </p>`
-}
-
-
+};
 
 function cardObject() {
+  var qualityVariable = "swill";
     return {
         title: $('.title-input').val(),
         body: $('.body-input').val(),
         quality: qualityVariable
     };
 }
+
 
 $.each(localStorage, function(key) {
     var cardData = JSON.parse(this);
@@ -49,63 +49,101 @@ var localStoreCard = function() {
 }
 
 $('.save-btn').on('click', function(event) {
+  var qualityVariable = "swill"
     event.preventDefault();
     if ($('.title-input').val() === "" || $('.body-input').val() === "") {
        return false;
     };  
-
     numCards++;
     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
     localStoreCard();
     $('form')[0].reset();
 });
 
-$(".bottom-box").on('click', function(event){
-    var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-    var qualityVariable;
+//rewrite upvote downvote idea functions into smaller functions
 
-    if (event.target.className === "upvote" || event.target.className === "downvote"){
+$(".bottom-box").on('click', changeQuality);
 
-        if (event.target.className === "upvote" && currentQuality === "plausible"){
-            qualityVariable = "genius";
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-        } else if (event.target.className === "upvote" && currentQuality === "swill") {
+
+function changeQuality(event){
+  if (event.target.className === "upvote"){
+  upVoteIdea(event);
+  }
+  else if (event.target.className === "downvote")
+    downVoteIdea(event);
+};
+
+function upVoteIdea(event){
+  var currentQuality = $($(event.target).siblings('span').children()[0]).text().trim();
+  var qualityVariable = "swill";
+  // var newText = $($(event.target).siblings('p.quality').children()[0]);
+      if (currentQuality.text().trim() === "swill") {
+        console.log('hi');
             qualityVariable = "plausible";
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        // debugger
+            currentQuality.text('plausible');
+          }
+   else if (currentQuality === "plausible"){
+      qualityVariable = "genius";
+      nextText.text(qualityVariable);
+  }
+};
+
+function downVoteIdea(event){
+  console.log('hey');
+}
+
+
+
+// $(".bottom-box").on('click', function(event){
+//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
+//     var qualityVariable = "swill";
+
+//     if (event.target.className === "upvote" || event.target.className === "downvote"){
+
+//         if (event.target.className === "upvote" && currentQuality === "plausible"){
+//             qualityVariable = "genius";
+//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
                
-        } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-            qualityVariable = "swill"
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+//         } else if (event.target.className === "upvote" && currentQuality === "swill") {
+//             qualityVariable = "plausible";
+//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+               
+//         } else if (event.target.className === "downvote" && currentQuality === "plausible") {
+//             qualityVariable = "swill"
+//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality === "genius") {
-            qualityVariable = "plausible"
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+//         } else if (event.target.className === "downvote" && currentQuality === "genius") {
+//             qualityVariable = "plausible"
+//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality === "swill") {
-            qualityVariable = "swill";
+//         } else if (event.target.className === "downvote" && currentQuality === "swill") {
+//             qualityVariable = "swill";
         
-        } else if (event.target.className === "upvote" && currentQuality === "genius") {
-            qualityVariable = "genius";
-        }
+//         } else if (event.target.className === "upvote" && currentQuality === "genius") {
+//             qualityVariable = "genius";
+//         }
 
-    var cardHTML = $(event.target).closest('.card-container');
-    var cardHTMLId = cardHTML[0].id;
-    var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-    var cardObjectInJS = JSON.parse(cardObjectInJSON);
+//     var cardHTML = $(event.target).closest('.card-container');
+//     var cardHTMLId = cardHTML[0].id;
+//     var cardObjectInJSON = localStorage.getItem(cardHTMLId);
+//     var cardObjectInJS = JSON.parse(cardObjectInJSON);
 
-    cardObjectInJS.quality = qualityVariable;
+//     cardObjectInJS.quality = qualityVariable;
 
-    var newCardJSON = JSON.stringify(cardObjectInJS);
-    localStorage.setItem(cardHTMLId, newCardJSON);
-    }
+//     var newCardJSON = JSON.stringify(cardObjectInJS);
+//     localStorage.setItem(cardHTMLId, newCardJSON);
+//     }
    
-    else if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
-});
+//     else if (event.target.className === "delete-button") {
+//         var cardHTML = $(event.target).closest('.card-container').remove();
+//         var cardHTMLId = cardHTML[0].id;
+//         localStorage.removeItem(cardHTMLId);
+//     }
+// });
+
+
+
       
 
 
