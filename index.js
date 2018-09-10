@@ -1,10 +1,11 @@
+$(document).ready(getIdeaFromLocalStorage);
 var numCards = 0;
 
 //this function is creating a new card using the parameters 
 function generateHTMLCard(card) {
   return `<div id="${card.id}" class="card-container">
-            <p class = "title-of-card"> ${card.title}<button class="delete-button"></button> </p>
-            <p class="body-of-card"> ${card.body} </p> 
+            <p class = "title-of-card" contenteditable=true> ${card.title}<button class="delete-button"></button> </p>
+            <p class="body-of-card" contenteditable=true> ${card.body} </p> 
             <p class="card-buttons"> 
                 <button class="upvote"></button> <button class="downvote"></button> 
                 <span class="quality"> quality: <span class="qualityVariable"> ${card.quality} </span> </span>
@@ -30,7 +31,7 @@ function submitIdea(event){
   var card = new Card(timeStamp, $('.title-input').val(), $('.body-input').val());
   var cardHTML = generateHTMLCard(card);
   $( ".bottom-box" ).prepend(cardHTML);   
-  // localStoreCard();
+  localStoreCard(card);
   resetForm();
 }
 
@@ -56,6 +57,7 @@ function cardChanges(event) {
 
 function deleteCard() {
   $(event.target).closest('.card-container').remove();
+  deleteFromLocalStorage();
 }
 
 function changeQualityUp() {
@@ -65,6 +67,7 @@ function changeQualityUp() {
   } else {
     $currentQuality.text('genius');
   }
+  updateStoredQuality(event);
 }
 
 function changeQualityDown() {
@@ -74,6 +77,21 @@ function changeQualityDown() {
   } else {
     $currentQuality.text('swill')
   }
+  updateStoredQuality(event);
+}
+
+function updateStoredQuality(event){
+  var timeStamp = $(event.target).closest('.card-container').attr('id');
+  var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
+  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
+  storedIdea.quality = $currentQuality.text();
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(timeStamp, stringifiedStoredIdea);
+}
+
+function deleteFromLocalStorage(){
+   var timeStamp = $(event.target).closest('.card-container').attr('id');
+   localStorage.removeItem(timeStamp);
 }
 
 function Card (id, title, body, quality){
@@ -85,101 +103,39 @@ function Card (id, title, body, quality){
 }
 
 
-//  $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-// });
 
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
+function localStoreCard(card) {
+    var cardString = JSON.stringify(card);
+    localStorage.setItem(card.id, cardString);
 }
 
 
+function getIdeaFromLocalStorage(){
+  for (var i=0; i<localStorage.length; i++) {
+    var timeStamp = localStorage.key(i);
+    var stringifiedIdea = localStorage.getItem(timeStamp)
+    var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
+     var cardHTML = generateHTMLCard(parsedIdeaToDisplay);
+  $( ".bottom-box" ).prepend(cardHTML);   
+  }
+};
 
-//rewrite upvote downvote idea functions into smaller functions
+$('.search-input').on('keyup', searchIdeas);
 
-// $(".bottom-box").on('click', changeQuality);
-
-// function changeQuality(event){
-//   if (event.target.className === "upvote"){
-//   upVoteIdea(event);
-//   }
-//   else if (event.target.className === "downvote")
-//     downVoteIdea(event);
-// };
-
-// function upVoteIdea(event){
-//   var currentQuality = $($(event.target).siblings('span').children()[0]).text().trim();
-//   var qualityVariable = "swill";
-//   // var newText = $($(event.target).siblings('p.quality').children()[0]);
-//       if (currentQuality.text().trim() === "swill") {
-//         console.log('hi');
-//             qualityVariable = "plausible";
-//         // debugger
-//             currentQuality.text('plausible');
-//           }
-//    else if (currentQuality === "plausible"){
-//       qualityVariable = "genius";
-//       nextText.text(qualityVariable);
-//   }
-// };
-
-// function downVoteIdea(event){
-//   console.log('hey');
-// }
-
-
-
-// $(".bottom-box").on('click', function(event){
-//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-//     var qualityVariable = "swill";
-
-//     if (event.target.className === "upvote" || event.target.className === "downvote"){
-
-//         if (event.target.className === "upvote" && currentQuality === "plausible"){
-//             qualityVariable = "genius";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "upvote" && currentQuality === "swill") {
-//             qualityVariable = "plausible";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-//             qualityVariable = "swill"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "genius") {
-//             qualityVariable = "plausible"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "swill") {
-//             qualityVariable = "swill";
-        
-//         } else if (event.target.className === "upvote" && currentQuality === "genius") {
-//             qualityVariable = "genius";
-//         }
-
-//     var cardHTML = $(event.target).closest('.card-container');
-//     var cardHTMLId = cardHTML[0].id;
-//     var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-//     var cardObjectInJS = JSON.parse(cardObjectInJSON);
-
-//     cardObjectInJS.quality = qualityVariable;
-
-//     var newCardJSON = JSON.stringify(cardObjectInJS);
-//     localStorage.setItem(cardHTMLId, newCardJSON);
-//     }
-   
-//     else if (event.target.className === "delete-button") {
-//         var cardHTML = $(event.target).closest('.card-container').remove();
-//         var cardHTMLId = cardHTML[0].id;
-//         localStorage.removeItem(cardHTMLId);
-//     }
-// });
-
-
+function searchIdeas(){
+  var searchInput = $('.search-input').val().toLowerCase();
+  var allIdeas = $('.card-container');
+  for (var i=0; i < allIdeas.length; i++) {
+    var ideaTitle = $(allIdeas[i]).children('.title-of-card').text().toLowerCase();
+    var ideaBody = $(allIdeas[i]).children('.body-of-card').text().toLowerCase();
+      if (ideaTitle.includes(searchInput) || ideaBody.includes(searchInput)){
+        $(allIdeas[i]).removeClass('hidden');
+      }
+      else {
+      $(allIdeas[i]).addClass('hidden');
+      }
+    }
+  }
 
       
 
