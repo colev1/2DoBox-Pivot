@@ -11,7 +11,6 @@ function newCard(id , title , body , quality) {
             </p>`
 };
 
-
 $('.save-btn').on('click', submitIdea); 
 $('.title-input').on('keyup', enableSubmitButton);
 $('.body-input').on('keyup', enableSubmitButton);
@@ -25,7 +24,6 @@ function enableSubmitButton(){
   }
 }
 
-
 function submitIdea(event){
   event.preventDefault();
   var qualityVariable = "swill"
@@ -35,26 +33,51 @@ function submitIdea(event){
   resetForm();
 }
 
-function resetForm(){
+function resetForm() {
   $('.title-input').val('');
   $('.body-input').val('');
   enableSubmitButton();
 }
 
+$('.bottom-box').on('click', cardChanges)
 
-else if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
+function cardChanges(event) {
+  if (event.target.className === "delete-button") {
+    deleteCard();
+  }
+  if (event.target.className === "upvote") {
+    changeQualityUp();
+  }
+  if (event.target.className === "downvote") {
+    changeQualityDown();
+  }
+}
 
+function deleteCard() {
+  $(event.target).closest('.card-container').remove();
+}
 
-function deleteCard(){
+function changeQualityUp() {
+  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
+  if ($currentQuality.text().trim() === 'swill'){
+    $currentQuality.text('plausible');
+  } else {
+    $currentQuality.text('genius');
+  }
+}
 
+function changeQualityDown() {
+  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
+  if ($currentQuality.text().trim() === 'genius') {
+    $currentQuality.text('plausible');
+  } else {
+    $currentQuality.text('swill')
+  }
 }
 
 // function cardObject() {
 //   var qualityVariable = "swill";
+    
 //     return {
 //         title: $('.title-input').val(),
 //         body: $('.body-input').val(),
