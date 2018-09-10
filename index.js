@@ -3,6 +3,7 @@
 var numCards = 0;
 // var qualityVariable = "swill";
 
+
 // var newCard = function(id , title , body , quality) {
 //   return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
 //             + title +  '</h2>'
@@ -15,8 +16,7 @@ var numCards = 0;
 //             + '</div>';
 // };
 
-
-
+//this function is creating a new card using the parameters 
 function newCard(id , title , body , quality) {
   return `<div id="${id}" class="card-container">
             <p class = "title-of-card"> ${title}<button class="delete-button"></button> </p>
@@ -27,26 +27,6 @@ function newCard(id , title , body , quality) {
             </p>`
 };
 
-function cardObject() {
-  var qualityVariable = "swill";
-    return {
-        title: $('.title-input').val(),
-        body: $('.body-input').val(),
-        quality: qualityVariable
-    };
-}
-
-
-$.each(localStorage, function(key) {
-    var cardData = JSON.parse(this);
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-});
-
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
-}
 
 $('.save-btn').on('click', function(event) {
   var qualityVariable = "swill"
@@ -56,42 +36,65 @@ $('.save-btn').on('click', function(event) {
     };  
     numCards++;
     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
-    localStoreCard();
+    // localStoreCard();
     $('form')[0].reset();
 });
 
+
+// function cardObject() {
+//   var qualityVariable = "swill";
+//     return {
+//         title: $('.title-input').val(),
+//         body: $('.body-input').val(),
+//         quality: qualityVariable
+//     };
+// }
+
+
+//  $.each(localStorage, function(key) {
+//     var cardData = JSON.parse(this);
+//     numCards++;
+//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+// });
+
+// var localStoreCard = function() {
+//     var cardString = JSON.stringify(cardObject());
+//     localStorage.setItem('card' + numCards  , cardString);
+// }
+
+
+
 //rewrite upvote downvote idea functions into smaller functions
 
-$(".bottom-box").on('click', changeQuality);
+// $(".bottom-box").on('click', changeQuality);
 
+// function changeQuality(event){
+//   if (event.target.className === "upvote"){
+//   upVoteIdea(event);
+//   }
+//   else if (event.target.className === "downvote")
+//     downVoteIdea(event);
+// };
 
-function changeQuality(event){
-  if (event.target.className === "upvote"){
-  upVoteIdea(event);
-  }
-  else if (event.target.className === "downvote")
-    downVoteIdea(event);
-};
+// function upVoteIdea(event){
+//   var currentQuality = $($(event.target).siblings('span').children()[0]).text().trim();
+//   var qualityVariable = "swill";
+//   // var newText = $($(event.target).siblings('p.quality').children()[0]);
+//       if (currentQuality.text().trim() === "swill") {
+//         console.log('hi');
+//             qualityVariable = "plausible";
+//         // debugger
+//             currentQuality.text('plausible');
+//           }
+//    else if (currentQuality === "plausible"){
+//       qualityVariable = "genius";
+//       nextText.text(qualityVariable);
+//   }
+// };
 
-function upVoteIdea(event){
-  var currentQuality = $($(event.target).siblings('span').children()[0]).text().trim();
-  var qualityVariable = "swill";
-  // var newText = $($(event.target).siblings('p.quality').children()[0]);
-      if (currentQuality.text().trim() === "swill") {
-        console.log('hi');
-            qualityVariable = "plausible";
-        // debugger
-            currentQuality.text('plausible');
-          }
-   else if (currentQuality === "plausible"){
-      qualityVariable = "genius";
-      nextText.text(qualityVariable);
-  }
-};
-
-function downVoteIdea(event){
-  console.log('hey');
-}
+// function downVoteIdea(event){
+//   console.log('hey');
+// }
 
 
 
