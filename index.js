@@ -1,3 +1,4 @@
+$(document).ready(getIdeaFromLocalStorage);
 var numCards = 0;
 
 //this function is creating a new card using the parameters 
@@ -30,7 +31,7 @@ function submitIdea(event){
   var card = new Card(timeStamp, $('.title-input').val(), $('.body-input').val());
   var cardHTML = generateHTMLCard(card);
   $( ".bottom-box" ).prepend(cardHTML);   
-  // localStoreCard();
+  localStoreCard(card);
   resetForm();
 }
 
@@ -65,6 +66,7 @@ function changeQualityUp() {
   } else {
     $currentQuality.text('genius');
   }
+  updateStoredQuality(event);
 }
 
 function changeQualityDown() {
@@ -74,7 +76,18 @@ function changeQualityDown() {
   } else {
     $currentQuality.text('swill')
   }
+  updateStoredQuality(event);
 }
+
+function updateStoredQuality(event){
+  var timeStamp = $(event.target).closest('.card-container').attr('id');
+  var storedIdea = JSON.parse(localStorage.getItem(timeStamp));
+  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
+  storedIdea.quality = $currentQuality.text();
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(timeStamp, stringifiedStoredIdea);
+}
+
 
 function Card (id, title, body, quality){
   this.title = title;
@@ -85,20 +98,24 @@ function Card (id, title, body, quality){
 }
 
 
-//  $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-//     numCards++;
-//     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-// });
 
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
+function localStoreCard(card) {
+    var cardString = JSON.stringify(card);
+    localStorage.setItem(card.id, cardString);
 }
 
 
+function getIdeaFromLocalStorage(){
+  for (var i=0; i<localStorage.length; i++) {
+    var timeStamp = localStorage.key(i);
+    var stringifiedIdea = localStorage.getItem(timeStamp)
+    var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
+     var cardHTML = generateHTMLCard(parsedIdeaToDisplay);
+  $( ".bottom-box" ).prepend(cardHTML);   
+  }
+};
 
-//rewrite upvote downvote idea functions into smaller functions
+
 
 // $(".bottom-box").on('click', changeQuality);
 
