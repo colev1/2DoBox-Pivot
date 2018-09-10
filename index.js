@@ -1,20 +1,4 @@
-// var title = $('.title-input').val();
-// var body = $('.body-input').val();
 var numCards = 0;
-// var qualityVariable = "swill";
-
-
-// var newCard = function(id , title , body , quality) {
-//   return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
-//             + title +  '</h2>'
-//             + '<button class="delete-button"></button>'
-//             +'<p class="body-of-card">'
-//             + body + '</p>'
-//             + '<button class="upvote"></button>' 
-//             + '<button class="downvote"></button>' 
-//             + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>' 
-//             + '</div>';
-// };
 
 //this function is creating a new card using the parameters 
 function newCard(id , title , body , quality) {
@@ -28,18 +12,46 @@ function newCard(id , title , body , quality) {
 };
 
 
-$('.save-btn').on('click', function(event) {
-  var qualityVariable = "swill"
-    event.preventDefault();
-    if ($('.title-input').val() === "" || $('.body-input').val() === "") {
-       return false;
-    };  
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
-    // localStoreCard();
-    $('form')[0].reset();
-});
+$('.save-btn').on('click', submitIdea); 
+$('.title-input').on('keyup', enableSubmitButton);
+$('.body-input').on('keyup', enableSubmitButton);
 
+
+function enableSubmitButton(){
+  if ($('.title-input').val() === "" || $('.body-input').val() === ""){
+   $('.save-btn').attr('disabled', true);
+  } else {
+    $('.save-btn').attr('disabled', false);
+  }
+}
+
+
+function submitIdea(event){
+  event.preventDefault();
+  var qualityVariable = "swill"
+  $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), 
+    $('.body-input').val(), qualityVariable)); 
+  // localStoreCard();
+  resetForm();
+}
+
+function resetForm(){
+  $('.title-input').val('');
+  $('.body-input').val('');
+  enableSubmitButton();
+}
+
+
+else if (event.target.className === "delete-button") {
+        var cardHTML = $(event.target).closest('.card-container').remove();
+        var cardHTMLId = cardHTML[0].id;
+        localStorage.removeItem(cardHTMLId);
+    }
+
+
+function deleteCard(){
+
+}
 
 // function cardObject() {
 //   var qualityVariable = "swill";
