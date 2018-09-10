@@ -1,13 +1,13 @@
 var numCards = 0;
 
 //this function is creating a new card using the parameters 
-function newCard(id , title , body , quality) {
-  return `<div id="${id}" class="card-container">
-            <p class = "title-of-card"> ${title}<button class="delete-button"></button> </p>
-            <p class="body-of-card"> ${body} </p> 
+function generateHTMLCard(card) {
+  return `<div id="${card.id}" class="card-container">
+            <p class = "title-of-card"> ${card.title}<button class="delete-button"></button> </p>
+            <p class="body-of-card"> ${card.body} </p> 
             <p class="card-buttons"> 
                 <button class="upvote"></button> <button class="downvote"></button> 
-                <span class="quality"> quality: <span class="qualityVariable"> ${quality} </span> </span>
+                <span class="quality"> quality: <span class="qualityVariable"> ${card.quality} </span> </span>
             </p>`
 };
 
@@ -26,9 +26,10 @@ function enableSubmitButton(){
 
 function submitIdea(event){
   event.preventDefault();
-  var qualityVariable = "swill"
-  $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), 
-    $('.body-input').val(), qualityVariable)); 
+  var timeStamp = Date.now();
+  var card = new Card(timeStamp, $('.title-input').val(), $('.body-input').val());
+  var cardHTML = generateHTMLCard(card);
+  $( ".bottom-box" ).prepend(cardHTML);   
   // localStoreCard();
   resetForm();
 }
@@ -75,15 +76,13 @@ function changeQualityDown() {
   }
 }
 
-// function cardObject() {
-//   var qualityVariable = "swill";
-    
-//     return {
-//         title: $('.title-input').val(),
-//         body: $('.body-input').val(),
-//         quality: qualityVariable
-//     };
-// }
+function Card (id, title, body, quality){
+  this.title = title;
+  this.body = body;
+  this.quality = quality || 'swill';
+  this.id = id;
+  return this;
+}
 
 
 //  $.each(localStorage, function(key) {
@@ -92,10 +91,10 @@ function changeQualityDown() {
 //     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 // });
 
-// var localStoreCard = function() {
-//     var cardString = JSON.stringify(cardObject());
-//     localStorage.setItem('card' + numCards  , cardString);
-// }
+var localStoreCard = function() {
+    var cardString = JSON.stringify(cardObject());
+    localStorage.setItem('card' + numCards  , cardString);
+}
 
 
 
