@@ -42,6 +42,17 @@ function resetForm(){
 }
 
 
+else if (event.target.className === "delete-button") {
+        var cardHTML = $(event.target).closest('.card-container').remove();
+        var cardHTMLId = cardHTML[0].id;
+        localStorage.removeItem(cardHTMLId);
+    }
+
+
+function deleteCard(){
+
+}
+
 // function cardObject() {
 //   var qualityVariable = "swill";
 //     return {
