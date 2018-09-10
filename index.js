@@ -28,17 +28,43 @@ function newCard(id , title , body , quality) {
 };
 
 
-$('.save-btn').on('click', function(event) {
+$('.save-btn').on('click', submitIdea); 
+$('.title-input').on('keyup', enableSubmitButton);
+$('.body-input').on('keyup', enableSubmitButton);
+
+
+function enableSubmitButton(){
+  if ($('.title-input').val() === "" || $('.body-input').val() === ""){
+   $('.save-btn').attr('disabled', true);
+  } else {
+    $('.save-btn').attr('disabled', false);
+  }
+}
+
+
+function submitIdea(event){
+  event.preventDefault();
   var qualityVariable = "swill"
-    event.preventDefault();
-    if ($('.title-input').val() === "" || $('.body-input').val() === "") {
-       return false;
-    };  
-    numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
-    // localStoreCard();
-    $('form')[0].reset();
-});
+  $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
+  resetForm();
+}
+
+function resetForm(){
+  $('.title-input').val('');
+  $('.body-input').val('');
+  enableSubmitButton();
+}
+
+// function submitIdea(event){
+//   event.preventDefault();
+//   var qualityVariable = "swill";
+//     numCards++;
+//     $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
+//     // localStoreCard();
+//     debugger
+//     $('form')[0].reset();
+//   }
+// ;
 
 
 // function cardObject() {
