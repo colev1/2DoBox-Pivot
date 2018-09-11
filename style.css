@@ -69,12 +69,17 @@
   margin-right: 20px;
 }
 
-.save-btn {
+.save-btn,
+.show-all-completed {
   background-color: #00a79d;
   border: none;
   color: #fff;
   display: flex;
   justify-content: center;
+}
+
+.show-all-completed {
+  background-color: #2059A5;
 }
 
 .card-container {
