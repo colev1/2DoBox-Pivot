@@ -16,6 +16,9 @@ $('.save-btn').on('click', submitTask);
 
 $('.task-input').on('keyup', enableSubmitButton);
 
+// $('.show-all-completed').on('click', showCompletedTodos)
+
+
 
 function enableSubmitButton(){
   if ($('.title-input').val() === "" || $('.task-input').val() === ""){
@@ -114,6 +117,7 @@ function Card (id, title, body, importance){
   this.importance = importance || 'swill';
   this.id = id;
   this.completedTask = false;
+  this.hidden = false;
   return this;
 }
 
@@ -137,10 +141,6 @@ function getTaskFromLocalStorage(){
   }
 };
 
-// function exemptedTasks() {
-//   if ()
-
-// }
 
 $('.filter-input').on('keyup', filterTasks);
 
@@ -177,6 +177,18 @@ function updateTaskBody(event){
   localStorage.setItem(currentTimeStamp, stringifiedstoredTask);
 };
 
+// function showCompletedTodos(event) {
+//   event.preventDefault();
+//   for (var i=0; i<localStorage.length; i++) {
+//     var timeStamp = localStorage.key(i);
+//     var stringifiedTask = localStorage.getItem(timeStamp);
+//     var parsedTaskToDisplay= JSON.parse(stringifiedTask);
+//      var cardHTML = generateHTMLCard(parsedTaskToDisplay);
+//     if (parsedTaskToDisplay.completedTask === true){    
+//     $( ".bottom-box" ).prepend(cardHTML);   
+//     }
+//   }
+// };
 
 
 
