@@ -113,9 +113,9 @@ function localStoreCard(card) {
 function getTaskFromLocalStorage(){
   for (var i=0; i<localStorage.length; i++) {
     var timeStamp = localStorage.key(i);
-    var stringifiedIdea = localStorage.getItem(timeStamp)
-    var parsedIdeaToDisplay= JSON.parse(stringifiedIdea);
-     var cardHTML = generateHTMLCard(parsedIdeaToDisplay);
+    var stringifiedTask = localStorage.getItem(timeStamp)
+    var parsedTaskToDisplay= JSON.parse(stringifiedTask);
+     var cardHTML = generateHTMLCard(parsedTaskToDisplay);
   $( ".bottom-box" ).prepend(cardHTML);   
   }
 };
