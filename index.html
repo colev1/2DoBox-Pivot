@@ -10,14 +10,17 @@
 <body>
   <section class="container">
     <article class="top-box">
-      <h1 class="header"><span class="idea">idea</span>box</h1>
+      <h1 class="header"><span class="todo">2Do</span>box</h1>
       <form class="input-form-container">
-        <input class="title-input inputs" type="text" placeholder="Title" aria-label="Type the title of your idea here"> 
-        <input class="body-input inputs" type="text" placeholder="Body" aria-label="Type the body of your idea here">
+        <input class="title-input inputs" type="text" placeholder="Title" aria-label="Type the title of your task here"> 
+        <input class="task-input inputs" type="text" placeholder="Task" aria-label="Type the task here">
         <button class="save-btn inputs" disabled>save</button> 
       </form>
     </article>
-    <input class="search-input inputs" type="text" placeholder="Search" aria-label="Search through ideas">
+    <article class="filter-container">
+    <span class="filter"> Filter tasks:  </span>
+    <input class="filter-input inputs" type="text" aria-label="Filter through tasks">
+  </article>
     <article class="bottom-box"></article>
   </section>
   <script src="./jquery/jquery-3.2.1.js"></script>

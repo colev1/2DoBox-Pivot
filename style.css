@@ -10,7 +10,7 @@
 }
 
 .top-box {
-  background-color: #e5f3f2;
+  background-color: #e5f3e8;
   box-sizing: border-box;
   height: 300px;
   margin: 0;
@@ -24,7 +24,7 @@
   margin:  16px;
 }
 
-.idea {
+.todo {
   color: #00a79d;
 }
 
@@ -49,10 +49,24 @@
   margin-top: 14px;
 }
 
-.search-input {
+.filter-input {
   height: 30px;
-  margin-top: 50px;
-  width: 45%;
+  margin: 0;
+  width: 30%;
+}
+
+.filter-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  /*width: 400px;*/
+}
+.filter{
+  margin: 5px;
+  font-size: 18px;
+  margin-right: 20px;
 }
 
 .save-btn {
@@ -72,6 +86,7 @@
   grid-template-rows: 1fr 2fr 1fr;
   width: 45%;
   border-bottom: solid black 1px;
+  max-height: 200px;
 }
 
 .card {
@@ -93,7 +108,7 @@ p {
   font-family: 'Open Sans', sans-serif;
 }
 
-.body-of-card{
+.task-of-card{
   color: #939598;
   font-family: 'Open Sans', sans-serif;
   font-size: 100%;
@@ -166,7 +181,7 @@ button {
     
   }
 
-  .search-input {
+  .filter-input {
       border: solid #999 1px;
       width: 76%;
   }
