@@ -8,12 +8,12 @@ function generateHTMLCard(card) {
             <p class="task-of-card" contenteditable=true onfocusout=updateTaskBody(event)> ${card.body} </p> 
             <p class="card-buttons"> 
                 <button class="upvote"></button> <button class="downvote"></button> 
-                <span class="quality"> quality: <span class="qualityVariable"> ${card.quality} </span> </span>
+                <span class="importance"> importance: <span class="importanceVariable"> ${card.importance} </span> </span>
             </p>`
 };
 
 $('.save-btn').on('click', submitTask); 
-$('.title-input').on('keyup', enableSubmitButton);
+
 $('.task-input').on('keyup', enableSubmitButton);
 
 
@@ -48,10 +48,10 @@ function cardChanges(event) {
     deleteCard();
   }
   if (event.target.className === "upvote") {
-    changeQualityUp();
+    changeimportanceUp();
   }
   if (event.target.className === "downvote") {
-    changeQualityDown();
+    changeimportanceDown();
   }
 }
 
@@ -60,31 +60,31 @@ function deleteCard() {
   deleteFromLocalStorage();
 }
 
-function changeQualityUp() {
-  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
-  if ($currentQuality.text().trim() === 'swill'){
-    $currentQuality.text('plausible');
+function changeimportanceUp() {
+  var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
+  if ($currentimportance.text().trim() === 'swill'){
+    $currentimportance.text('plausible');
   } else {
-    $currentQuality.text('genius');
+    $currentimportance.text('genius');
   }
-  updateStoredQuality(event);
+  updateStoredimportance(event);
 }
 
-function changeQualityDown() {
-  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
-  if ($currentQuality.text().trim() === 'genius') {
-    $currentQuality.text('plausible');
+function changeimportanceDown() {
+  var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
+  if ($currentimportance.text().trim() === 'genius') {
+    $currentimportance.text('plausible');
   } else {
-    $currentQuality.text('swill')
+    $currentimportance.text('swill')
   }
-  updateStoredQuality(event);
+  updateStoredimportance(event);
 }
 
-function updateStoredQuality(event){
+function updateStoredimportance(event){
   var timeStamp = $(event.target).closest('.card-container').attr('id');
   var storedTask = JSON.parse(localStorage.getItem(timeStamp));
-  var $currentQuality = $($(event.target).siblings('.quality').children()[0]);
-  storedTask.quality = $currentQuality.text();
+  var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
+  storedTask.importance = $currentimportance.text();
   var stringifiedstoredTask = JSON.stringify(storedTask);
   localStorage.setItem(timeStamp, stringifiedstoredTask);
 }
@@ -94,10 +94,10 @@ function deleteFromLocalStorage(){
    localStorage.removeItem(timeStamp);
 }
 
-function Card (id, title, body, quality){
+function Card (id, title, body, importance){
   this.title = title;
   this.body = body;
-  this.quality = quality || 'swill';
+  this.importance = importance || 'swill';
   this.id = id;
   return this;
 }
