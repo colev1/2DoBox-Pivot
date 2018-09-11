@@ -4,8 +4,8 @@ var numCards = 0;
 //this function is creating a new card using the parameters 
 function generateHTMLCard(card) {
   return `<div id="${card.id}" class="card-container">
-            <p class = "title-of-card" contenteditable=true> ${card.title}<button class="delete-button"></button> </p>
-            <p class="body-of-card" contenteditable=true> ${card.body} </p> 
+            <p class = "title-of-card" contenteditable=true onfocusout=updateIdeaTitle(event)> ${card.title}<button class="delete-button"></button> </p>
+            <p class="body-of-card" contenteditable=true onfocusout=updateIdeaBody(event)> ${card.body} </p> 
             <p class="card-buttons"> 
                 <button class="upvote"></button> <button class="downvote"></button> 
                 <span class="quality"> quality: <span class="qualityVariable"> ${card.quality} </span> </span>
@@ -137,8 +137,23 @@ function searchIdeas(){
     }
   }
 
-      
+function updateIdeaTitle(event){
+  var currentTimeStamp = $(event.target).closest('.card-container').attr('id');
+  var updatedTitle = $(event.target).text();
+  var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
+  storedIdea.title = updatedTitle;
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
+};
 
+function updateIdeaBody(event){
+  var currentTimeStamp = $(event.target).closest('.card-container').attr('id');
+  var updatedBody = $(event.target).text();
+  var storedIdea = JSON.parse(localStorage.getItem(currentTimeStamp));
+  storedIdea.body = updatedBody;
+  var stringifiedStoredIdea = JSON.stringify(storedIdea);
+  localStorage.setItem(currentTimeStamp, stringifiedStoredIdea);
+};
 
 
 
