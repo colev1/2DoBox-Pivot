@@ -9,7 +9,7 @@ function generateHTMLCard(card) {
             <p class="card-buttons"> 
                 <button class="upvote"></button> <button class="downvote"></button> 
                 <span class="importance"> importance: <span class="importanceVariable"> ${card.importance} </span> </span>
-            </p>`
+            <button class="completed-task-button">Completed Task</button></p>`
 };
 
 $('.save-btn').on('click', submitTask); 
@@ -24,6 +24,17 @@ function enableSubmitButton(){
     $('.save-btn').attr('disabled', false);
   }
 }
+
+
+function completedTask() {
+  var completedTaskCard = $(event.target).closest('.card-container');
+  completedTaskCard.toggleClass('completed-task');
+  var timeStamp = completedTaskCard.attr('id');
+  var storedTask = JSON.parse(localStorage.getItem(timeStamp));
+  storedTask.completedTask = !storedTask.completedTask;
+  localStoreCard(storedTask);
+}
+
 
 function submitTask(event){
   event.preventDefault();
@@ -52,6 +63,9 @@ function cardChanges(event) {
   }
   if (event.target.className === "downvote") {
     changeimportanceDown();
+  }
+  if (event.target.className === "completed-task-button") {
+    completedTask();
   }
 }
 
@@ -99,6 +113,7 @@ function Card (id, title, body, importance){
   this.body = body;
   this.importance = importance || 'swill';
   this.id = id;
+  this.completedTask = false;
   return this;
 }
 
@@ -116,9 +131,16 @@ function getTaskFromLocalStorage(){
     var stringifiedTask = localStorage.getItem(timeStamp)
     var parsedTaskToDisplay= JSON.parse(stringifiedTask);
      var cardHTML = generateHTMLCard(parsedTaskToDisplay);
-  $( ".bottom-box" ).prepend(cardHTML);   
+    if (parsedTaskToDisplay.completedTask === false){    
+    $( ".bottom-box" ).prepend(cardHTML);   
+    }
   }
 };
+
+// function exemptedTasks() {
+//   if ()
+
+// }
 
 $('.filter-input').on('keyup', filterTasks);
 

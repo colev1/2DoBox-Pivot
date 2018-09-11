@@ -167,6 +167,16 @@ button {
   width: 20px;
 }
 
+.completed-task-button {
+  border: solid 3px black;
+  margin-top: 20px;
+
+}
+
+.completed-task {
+  background-color: #F0F0F0;
+}
+
 .hidden{
   display: none;
 }
