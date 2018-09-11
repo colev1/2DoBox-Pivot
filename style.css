@@ -24,7 +24,7 @@
   margin:  16px;
 }
 
-.idea {
+.todo {
   color: #00a79d;
 }
 
@@ -49,10 +49,20 @@
   margin-top: 14px;
 }
 
-.search-input {
+.filter-input {
   height: 30px;
-  margin-top: 50px;
+  margin: 0;
   width: 45%;
+}
+
+.filter-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+.filter{
+  margin: 5px;
 }
 
 .save-btn {
@@ -72,6 +82,7 @@
   grid-template-rows: 1fr 2fr 1fr;
   width: 45%;
   border-bottom: solid black 1px;
+  max-height: 200px;
 }
 
 .card {
@@ -93,7 +104,7 @@ p {
   font-family: 'Open Sans', sans-serif;
 }
 
-.body-of-card{
+.task-of-card{
   color: #939598;
   font-family: 'Open Sans', sans-serif;
   font-size: 100%;
@@ -166,7 +177,7 @@ button {
     
   }
 
-  .search-input {
+  .filter-input {
       border: solid #999 1px;
       width: 76%;
   }
