@@ -16,7 +16,7 @@ $('.save-btn').on('click', submitTask);
 
 $('.task-input').on('keyup', enableSubmitButton);
 
-// $('.show-all-completed').on('click', showCompletedTodos)
+$('.show-all-completed').on('click', showCompletedTodos)
 
 
 
@@ -29,12 +29,13 @@ function enableSubmitButton(){
 }
 
 
-function completedTask() {
+function completedTask(event) {
   var completedTaskCard = $(event.target).closest('.card-container');
   completedTaskCard.toggleClass('completed-task');
   var timeStamp = completedTaskCard.attr('id');
   var storedTask = JSON.parse(localStorage.getItem(timeStamp));
   storedTask.completedTask = !storedTask.completedTask;
+  storedTask.hidden = !storedTask.hidden;
   localStoreCard(storedTask);
 }
 
@@ -60,15 +61,14 @@ $('.bottom-box').on('click', cardChanges)
 function cardChanges(event) {
   if (event.target.className === "delete-button") {
     deleteCard();
-  }
-  if (event.target.className === "upvote") {
-    changeimportanceUp();
-  }
-  if (event.target.className === "downvote") {
-    changeimportanceDown();
-  }
-  if (event.target.className === "completed-task-button") {
-    completedTask();
+  } if (event.target.className === "upvote") {
+    $($(event.target).siblings('.importance').children()[0]).text(upVoteImportance(event));
+    updateStoredimportance(event);
+  } if (event.target.className === "downvote") {
+    $($(event.target).siblings('.importance').children()[0]).text(downVoteImportance(event));
+    updateStoredimportance(event);
+  } if (event.target.className === "completed-task-button") {
+    completedTask(event);
   }
 }
 
@@ -77,27 +77,29 @@ function deleteCard() {
   deleteFromLocalStorage();
 }
 
-function changeimportanceUp() {
-  var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
-  if ($currentimportance.text().trim() === 'swill'){
-    $currentimportance.text('plausible');
-  } else {
-    $currentimportance.text('genius');
+
+function upVoteImportance(event){
+  var $currentimportance = $($(event.target).siblings('.importance').children()[0]).text().trim();
+  var arr = ["none", "low", "normal", "high", "critical"];
+  for (var i=0; i<arr.length; i++){
+    if ($currentimportance === arr[i]){
+      return $currentimportance = arr[i+1];
+    }
   }
-  updateStoredimportance(event);
 }
 
-function changeimportanceDown() {
-  var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
-  if ($currentimportance.text().trim() === 'genius') {
-    $currentimportance.text('plausible');
-  } else {
-    $currentimportance.text('swill')
-  }
-  updateStoredimportance(event);
+
+function downVoteImportance(event){
+  var $currentimportance = $($(event.target).siblings('.importance').children()[0]).text().trim();
+    var arr = ["none", "low", "normal", "high", "critical"];
+    for (var i =0; i < arr.length; i++) {
+      if ($currentimportance === arr[i]){
+        return $currentimportance = arr[i-1];
+      }
+    }
 }
 
-function updateStoredimportance(event){
+function updateStoredimportance(event) {
   var timeStamp = $(event.target).closest('.card-container').attr('id');
   var storedTask = JSON.parse(localStorage.getItem(timeStamp));
   var $currentimportance = $($(event.target).siblings('.importance').children()[0]);
@@ -114,7 +116,7 @@ function deleteFromLocalStorage(){
 function Card (id, title, body, importance){
   this.title = title;
   this.body = body;
-  this.importance = importance || 'swill';
+  this.importance = "normal";
   this.id = id;
   this.completedTask = false;
   this.hidden = false;
@@ -177,18 +179,19 @@ function updateTaskBody(event){
   localStorage.setItem(currentTimeStamp, stringifiedstoredTask);
 };
 
-// function showCompletedTodos(event) {
-//   event.preventDefault();
-//   for (var i=0; i<localStorage.length; i++) {
-//     var timeStamp = localStorage.key(i);
-//     var stringifiedTask = localStorage.getItem(timeStamp);
-//     var parsedTaskToDisplay= JSON.parse(stringifiedTask);
-//      var cardHTML = generateHTMLCard(parsedTaskToDisplay);
-//     if (parsedTaskToDisplay.completedTask === true){    
-//     $( ".bottom-box" ).prepend(cardHTML);   
-//     }
-//   }
-// };
+function showCompletedTodos(event) {
+  event.preventDefault();
+  console.log('hi');
+  for (var i=0; i<localStorage.length; i++) {
+    var timeStamp = localStorage.key(i);
+    var stringifiedTask = localStorage.getItem(timeStamp);
+    var parsedTaskToDisplay= JSON.parse(stringifiedTask);
+     var cardHTML = generateHTMLCard(parsedTaskToDisplay);
+    if (parsedTaskToDisplay.completedTask === true){    
+     $( ".bottom-box" ).prepend(cardHTML);   
+    }
+  }
+};
 
 
 
