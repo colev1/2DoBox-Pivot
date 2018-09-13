@@ -1,6 +1,6 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .container {
@@ -10,7 +10,7 @@
 }
 
 .top-box {
-  background-color: #e5f3e8;
+  background-color: #CEE0F6;
   box-sizing: border-box;
   height: 300px;
   margin: 0;
@@ -80,6 +80,10 @@
 
 .show-all-completed {
   background-color: #2059A5;
+}
+
+.show-all-completed:hover{
+  background-color: #5F9BE8;
 }
 
 .card-container {
@@ -173,9 +177,18 @@ button {
 }
 
 .completed-task-button {
-  border: solid 3px black;
-  margin: 20px 0 0 40px;
+  border: solid 1px black;
+  padding: 1px;
+}
 
+.card-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.completed-task-button:hover {
+  background-color: grey;
 }
 
 .completed-task {
@@ -199,17 +212,21 @@ button {
 
   .filter-input {
     border: solid #999 1px;
-    width: 75%;
-    margin-right: 60px;
+    width: 70%;
   }
 
-  .container{
+  .filter-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .container {
     min-width: 200px;
   }
 
-  .card-buttons{
-    display: flex;
-    flex-direction: row;
+  .card-buttons {
     align-items: center;
     justify-content: space-around;
     margin-bottom: 10px;
